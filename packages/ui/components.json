@@ -10,8 +10,9 @@
     "cssVariables": true
   },
   "aliases": {
+    "components": "@acme/ui",
+    "ui": "@acme/ui",
     "utils": "@acme/ui",
-    "components": "src/",
-    "ui": "src/"
+    "hooks": "@acme/hooks"
   }
 }

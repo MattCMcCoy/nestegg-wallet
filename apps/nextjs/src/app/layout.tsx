@@ -8,7 +8,10 @@ import { Toaster } from "@acme/ui/toast";
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
+import { SidebarProvider } from "@acme/ui";
+
 import "~/app/styles.css";
+import { AppSidebar } from "./_components/appsidebar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -58,7 +61,10 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         )}
       >
         <ThemeProvider>
-          <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          <SidebarProvider>
+            <AppSidebar />
+            <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          </SidebarProvider>
           <div className="absolute right-4 bottom-4">
             <ThemeToggle />
           </div>
