@@ -1,13 +1,14 @@
-import { ACCOUNT_TYPE_META, AccountType, AccountWithBalances } from "./type";
+import type { AccountType, AccountWithBalances } from "./type";
+import { ACCOUNT_TYPE_META } from "./type";
 
-export type AccountViewModel = {
+export interface AccountViewModel {
   id: string;
   name: string;
   type: AccountType;
   balance: number;
   color: string;
   mask?: string;
-};
+}
 
 // Small, reusable helper
 function getLatestBalance(account: AccountWithBalances): number {

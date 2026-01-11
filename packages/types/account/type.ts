@@ -32,10 +32,10 @@ export const isLiabilityType = (type: AccountType) =>
 // UI metadata (display-only)
 // ==============================
 
-type AccountTypeMeta = {
+interface AccountTypeMeta {
   title: string;
   color: string;
-};
+}
 
 export const ACCOUNT_TYPE_META: Record<AccountType, AccountTypeMeta> = {
   [AccountType.CHECKING]: { title: "Checking", color: "bg-blue-500" },

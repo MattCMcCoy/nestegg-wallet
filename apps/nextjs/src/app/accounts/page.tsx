@@ -1,12 +1,12 @@
-import { HydrateClient, prefetch } from "~/trpc/server";
-import AccountsPageClient from "./client";
+import { HydrateClient, prefetch, trpc } from "~/trpc/server";
+import { AccountsPageClient } from "./client";
 
-export default async function AccountsPage() {
-    await prefetch.accounts.overview();
+export default function AccountsPage() {
+  prefetch(trpc.financial.overview.queryOptions());
 
-    return (
-        <HydrateClient>
-            <AccountsPageClient />
-        </HydrateClient>
-    );
+  return (
+    <HydrateClient>
+      <AccountsPageClient />
+    </HydrateClient>
+  );
 }

@@ -17,6 +17,12 @@ export const env = createEnv({
    */
   server: {
     POSTGRES_URL: z.url(),
+    DATA_MODE: z
+      .enum(["development", "production"])
+      .default(
+        process.env.NODE_ENV === "development" ? "development" : "production",
+      )
+      .optional(),
   },
 
   /**
@@ -31,6 +37,7 @@ export const env = createEnv({
    */
   experimental__runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    DATA_MODE: process.env.DATA_MODE,
 
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },

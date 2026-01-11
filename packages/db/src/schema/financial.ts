@@ -1,4 +1,5 @@
 // src/db/schema/financial.ts
+import { relations } from "drizzle-orm";
 import { decimal, index, pgTable, uniqueIndex } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
@@ -154,3 +155,31 @@ export const CreateAccountBalanceSchema = createInsertSchema(accountBalances, {
     .transform((v) => (v == null ? undefined : String(v))),
   asOf: z.date(),
 });
+
+// ----------------------------
+// Relations
+// ----------------------------
+export const financialAccountsRelations = relations(
+  financialAccounts,
+  ({ many }) => ({
+    balances: many(accountBalances),
+    transactions: many(transactions),
+  }),
+);
+
+export const accountBalancesRelations = relations(
+  accountBalances,
+  ({ one }) => ({
+    account: one(financialAccounts, {
+      fields: [accountBalances.accountId],
+      references: [financialAccounts.id],
+    }),
+  }),
+);
+
+export const transactionsRelations = relations(transactions, ({ one }) => ({
+  account: one(financialAccounts, {
+    fields: [transactions.accountId],
+    references: [financialAccounts.id],
+  }),
+}));

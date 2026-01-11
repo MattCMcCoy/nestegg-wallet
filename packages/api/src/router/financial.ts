@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { and, desc, eq, gte } from "@nestegg/db";
+import { and, asc, desc, eq, gte } from "@acme/db";
 import {
   accountBalances,
   CreateAccountBalanceSchema,
@@ -10,7 +10,7 @@ import {
   financialAccounts,
   financialConnections,
   transactions,
-} from "@nestegg/db/schema";
+} from "@acme/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
@@ -144,6 +144,18 @@ export const financialRouter = createTRPCRouter({
   // Account Overview (🔥 most used)
   // ============================
   overview: protectedProcedure.query(async ({ ctx }) => {
+    const dataMode =
+      process.env.DATA_MODE ??
+      (process.env.NODE_ENV === "development" ? "development" : "production");
+
+    // Development mode: return mocks without touching the database
+    if (dataMode === "development") {
+      const { generateMockAccounts } = await import("../mocks/financial");
+      const mockAccounts = generateMockAccounts(ctx.session.user.id);
+      return mockAccounts;
+    }
+
+    // Production: query the database
     const threeYearsAgo = new Date();
     threeYearsAgo.setFullYear(threeYearsAgo.getFullYear() - 3);
 
@@ -153,7 +165,7 @@ export const financialRouter = createTRPCRouter({
       with: {
         balances: {
           where: gte(accountBalances.asOf, threeYearsAgo),
-          orderBy: accountBalances.asOf,
+          orderBy: asc(accountBalances.asOf),
         },
       },
     });
