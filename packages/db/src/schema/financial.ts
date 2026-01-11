@@ -143,6 +143,14 @@ export const CreateTransactionSchema = createInsertSchema(transactions, {
 
 export const CreateAccountBalanceSchema = createInsertSchema(accountBalances, {
   accountId: z.string(),
-  current: z.number(),
+  current: z.union([z.number(), z.string()]).transform(String),
+  available: z
+    .union([z.number(), z.string()])
+    .optional()
+    .transform((v) => (v == null ? undefined : String(v))),
+  limit: z
+    .union([z.number(), z.string()])
+    .optional()
+    .transform((v) => (v == null ? undefined : String(v))),
   asOf: z.date(),
 });
