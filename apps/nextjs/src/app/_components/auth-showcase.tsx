@@ -9,6 +9,7 @@ async function signInAction() {
   "use server";
   try {
     const headersList = await headers();
+    console.log("Attempting Discord sign-in...");
     const res = await auth.api.signInSocial({
       headers: headersList,
       body: {
@@ -16,25 +17,24 @@ async function signInAction() {
         callbackURL: "/",
       },
     });
+    console.log("Sign-in response:", { hasUrl: !!res.url, res });
     if (!res.url) {
       console.error("No URL returned from signInSocial", res);
       throw new Error("No URL returned from signInSocial. Please check your Discord OAuth configuration.");
     }
     redirect(res.url);
   } catch (error) {
-    console.error("Sign in error:", error);
+    console.error("Sign in error details:", {
+      error,
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     throw error;
   }
 }
 
 export async function AuthShowcase() {
-  let session;
-  try {
-    session = await getSession();
-  } catch (error) {
-    console.error("Failed to get session:", error);
-    session = null;
-  }
+  const session = await getSession();
 
   if (!session) {
     return (
