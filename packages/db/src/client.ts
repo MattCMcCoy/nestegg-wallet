@@ -55,10 +55,22 @@ client
         "postgresql://***:***@",
       );
     }
-    const errorCode =
-      error && typeof error === "object" && "code" in error
-        ? String(error.code)
-        : undefined;
+    let errorCode: string | undefined;
+    if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      typeof error.code === "string"
+    ) {
+      errorCode = error.code;
+    } else if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      typeof error.code === "number"
+    ) {
+      errorCode = String(error.code);
+    }
     let hostname: string | undefined;
     try {
       hostname = new URL(connectionString).hostname;

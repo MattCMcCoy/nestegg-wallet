@@ -7,6 +7,8 @@ node_modules
 
 # testing
 coverage
+.cache/vitest
+vitest.config.ts.timestamp-*
 
 # next.js
 .next/
