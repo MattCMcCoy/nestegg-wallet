@@ -31,9 +31,16 @@ export const createTRPCContext = async (opts: {
   auth: Auth;
 }) => {
   const authApi = opts.auth.api;
-  const session = await authApi.getSession({
-    headers: opts.headers,
-  });
+  let session = null;
+  try {
+    session = await authApi.getSession({
+      headers: opts.headers,
+    });
+  } catch (error) {
+    // If session retrieval fails, continue with null session
+    // This allows unauthenticated requests to proceed
+    console.error("Failed to get session in tRPC context:", error);
+  }
   return {
     authApi,
     session,

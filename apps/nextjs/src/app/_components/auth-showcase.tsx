@@ -5,28 +5,41 @@ import { Button } from "@nestegg/ui/button";
 
 import { auth, getSession } from "~/auth/server";
 
+async function signInAction() {
+  "use server";
+  try {
+    const headersList = await headers();
+    const res = await auth.api.signInSocial({
+      headers: headersList,
+      body: {
+        provider: "discord",
+        callbackURL: "/",
+      },
+    });
+    if (!res.url) {
+      console.error("No URL returned from signInSocial", res);
+      throw new Error("No URL returned from signInSocial. Please check your Discord OAuth configuration.");
+    }
+    redirect(res.url);
+  } catch (error) {
+    console.error("Sign in error:", error);
+    throw error;
+  }
+}
+
 export async function AuthShowcase() {
-  const session = await getSession();
+  let session;
+  try {
+    session = await getSession();
+  } catch (error) {
+    console.error("Failed to get session:", error);
+    session = null;
+  }
 
   if (!session) {
     return (
-      <form>
-        <Button
-          size="lg"
-          formAction={async () => {
-            "use server";
-            const res = await auth.api.signInSocial({
-              body: {
-                provider: "discord",
-                callbackURL: "/",
-              },
-            });
-            if (!res.url) {
-              throw new Error("No URL returned from signInSocial");
-            }
-            redirect(res.url);
-          }}
-        >
+      <form action={signInAction}>
+        <Button size="lg" type="submit">
           Sign in with Discord
         </Button>
       </form>
