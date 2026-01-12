@@ -5,16 +5,14 @@ import type { AppRouter } from "./root";
 /**
  * Inference helpers for input types
  * @example
- * type PostByIdInput = RouterInputs['post']['byId']
- *      ^? { id: number }
+ * type FinancialOverviewInput = RouterInputs['financial']['overview']
  */
 type RouterInputs = inferRouterInputs<AppRouter>;
 
 /**
  * Inference helpers for output types
  * @example
- * type AllPostsOutput = RouterOutputs['post']['all']
- *      ^? Post[]
+ * type FinancialOverviewOutput = RouterOutputs['financial']['overview']
  */
 type RouterOutputs = inferRouterOutputs<AppRouter>;
 
