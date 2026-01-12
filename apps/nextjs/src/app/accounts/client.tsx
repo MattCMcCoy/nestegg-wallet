@@ -19,6 +19,7 @@ import {
   AccountsLineChartSkeleton,
   AccountsProgressSkeleton,
 } from "./skeletons";
+import { SpendingCalendar } from "./SpendingCalendar";
 
 type ChartRow = {
   date: string;
@@ -147,6 +148,14 @@ export function AccountsPageClient() {
 
         <AccountsProgress accounts={accounts} />
       </div>
+
+      <SpendingCalendar
+        data={{
+          "2026-01-15": -125.5, // Shows as "$-125.50"
+          "2026-01-20": "High", // Shows as custom label
+        }}
+        onDayClick={(date) => console.log("Clicked:", date)}
+      />
     </div>
   );
 }
