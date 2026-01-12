@@ -29,13 +29,11 @@
   "devDependencies": {
     "@nestegg/prettier-config": "workspace:*",
     "@turbo/gen": "^2.5.8",
+    "dotenv": "^17.2.3",
     "dotenv-cli": "^10.0.0",
     "prettier": "catalog:",
     "turbo": "^2.5.8",
     "typescript": "catalog:"
   },
-  "prettier": "@nestegg/prettier-config",
-  "dependencies": {
-    "dotenv": "^17.2.3"
-  }
+  "prettier": "@nestegg/prettier-config"
 }
