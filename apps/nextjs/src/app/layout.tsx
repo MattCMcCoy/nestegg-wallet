@@ -1,16 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 
-import { cn } from "@acme/ui";
+import { cn, SidebarProvider } from "@acme/ui";
 import { ThemeProvider, ThemeToggle } from "@acme/ui/theme";
 import { Toaster } from "@acme/ui/toast";
 
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
-import { SidebarProvider } from "@acme/ui";
-
 import "~/app/styles.css";
+
 import { AppSidebar } from "./_components/appsidebar";
 
 export const metadata: Metadata = {
@@ -41,13 +40,15 @@ export const viewport: Viewport = {
   ],
 };
 
-const geistSans = Geist({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
+  variable: "--font-inter",
+  display: "swap",
 });
-const geistMono = Geist_Mono({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
+  variable: "--font-jetbrains-mono",
+  display: "swap",
 });
 
 export default function RootLayout(props: { children: React.ReactNode }) {
@@ -56,8 +57,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body
         className={cn(
           "bg-background text-foreground min-h-screen font-sans antialiased",
-          geistSans.variable,
-          geistMono.variable,
+          inter.variable,
+          jetbrainsMono.variable,
         )}
       >
         <ThemeProvider>

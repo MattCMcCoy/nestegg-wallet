@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "@acme/tailwind-config/theme";
 
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/geist-mono";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 
 @source "../../../packages/ui/src/*.{ts,tsx}";
 
@@ -23,8 +23,8 @@
 
 @layer base {
   :root {
-    --font-geist-sans: "Geist Variable";
-    --font-geist-mono: "Geist Mono Variable";
+    --font-inter: "Inter Variable";
+    --font-jetbrains-mono: "JetBrains Mono Variable";
   }
   * {
     @apply border-border;

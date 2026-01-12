@@ -8,6 +8,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+
+import { Button } from "@acme/ui/button";
 import {
   Card,
   CardContent,
@@ -16,9 +18,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@acme/ui/card";
-import { Button } from "@acme/ui/button";
-import { useTheme } from "@acme/ui/theme";
 import { ChartTooltip, ChartTooltipContent } from "@acme/ui/chart";
+import { useTheme } from "@acme/ui/theme";
 
 type ChartRow = {
   date: string;
@@ -31,8 +32,10 @@ interface AccountsLineChartProps {
 
 export function AccountsLineChart({ data }: AccountsLineChartProps) {
   const { resolvedTheme } = useTheme();
-  const axisColor = resolvedTheme === "dark" ? "#fff" : "#000";
-  const gridColor = resolvedTheme === "dark" ? "#374151" : "#e5e7eb";
+  const gridColor =
+    resolvedTheme === "dark"
+      ? "rgba(255, 255, 255, 0.05)"
+      : "rgba(0, 0, 0, 0.05)";
 
   // latest total
   const latestTotal = data.length ? data[data.length - 1]?.total : 0;
@@ -55,14 +58,17 @@ export function AccountsLineChart({ data }: AccountsLineChartProps) {
             <CartesianGrid
               stroke={gridColor}
               vertical={false}
-              horizontal={false}
+              horizontal={true}
             />
             <XAxis dataKey="date" hide />
             <YAxis
               orientation="right"
               tickLine={false}
+              axisLine={false}
+              fontFamily="var(--font-inter)"
               className="font-sans text-sm text-gray-500 dark:text-gray-400"
-              tick={{ fill: axisColor }}
+              tick={{ fontSize: 10, fontFamily: "var(--font-inter)" }}
+              tickFormatter={(value: number) => `$${value.toLocaleString()}`}
             />
             <ChartTooltip
               cursor={false}
@@ -71,15 +77,28 @@ export function AccountsLineChart({ data }: AccountsLineChartProps) {
             />
             <defs>
               <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopOpacity={0.8} />
-                <stop offset="95%" stopOpacity={0.1} />
+                <stop
+                  offset="0%"
+                  stopColor="var(--chart-2)"
+                  stopOpacity={0.6}
+                />
+                <stop
+                  offset="50%"
+                  stopColor="var(--chart-2)"
+                  stopOpacity={0.3}
+                />
+                <stop
+                  offset="100%"
+                  stopColor="var(--chart-2)"
+                  stopOpacity={0}
+                />
               </linearGradient>
             </defs>
             <Area
               dataKey="total"
               type="natural"
+              stroke="var(--chart-2)"
               fill="url(#fillDesktop)"
-              fillOpacity={0.4}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -90,14 +109,28 @@ export function AccountsLineChart({ data }: AccountsLineChartProps) {
           <div className="grid w-full gap-2">
             <div className="flex flex-col items-center gap-2 leading-none font-medium">
               <div className="flex gap-2">
-                <Button className="w-16">1W</Button>
-                <Button className="w-16">1M</Button>
-                <Button className="w-16">3M</Button>
-                <Button className="w-16">6M</Button>
-                <Button className="w-16">YTD</Button>
-                <Button className="w-16">1Y</Button>
+                <Button className="text-primary hover:text-primary/80 w-16 border bg-transparent hover:bg-white/3">
+                  1W
+                </Button>
+                <Button className="text-primary hover:text-primary/80 w-16 border bg-transparent hover:bg-white/3">
+                  1M
+                </Button>
+                <Button className="text-primary hover:text-primary/80 w-16 border bg-transparent hover:bg-white/3">
+                  3M
+                </Button>
+                <Button className="text-primary hover:text-primary/80 w-16 border bg-transparent hover:bg-white/3">
+                  6M
+                </Button>
+                <Button className="text-primary hover:text-primary/80 w-16 border bg-transparent hover:bg-white/3">
+                  YTD
+                </Button>
+                <Button className="text-primary hover:text-primary/80 w-16 border bg-transparent hover:bg-white/3">
+                  1Y
+                </Button>
               </div>
-              <Button className="w-full">Add Account</Button>
+              <Button className="text-primary hover:text-primary/80 w-full border bg-transparent hover:bg-white/3">
+                Add Account
+              </Button>
             </div>
           </div>
         </div>
@@ -105,4 +138,3 @@ export function AccountsLineChart({ data }: AccountsLineChartProps) {
     </Card>
   );
 }
-

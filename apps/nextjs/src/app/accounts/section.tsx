@@ -1,5 +1,5 @@
 import type { AccountType, AccountWithBalances } from "@acme/types";
-import { mapAccountToViewModel } from "@acme/types";
+import { ACCOUNT_TYPE_META, mapAccountToViewModel } from "@acme/types";
 
 import { AccountCard } from "./AccountCard";
 
@@ -21,10 +21,13 @@ export function AccountSection({
         {accounts
           .filter((a) => allowedTypes.has(a.type))
           .map((account) => (
-            <AccountCard
-              key={account.id}
-              account={mapAccountToViewModel(account)}
-            />
+            <div className="font-mono text-xs font-semibold">
+              {ACCOUNT_TYPE_META[account.type].title}
+              <AccountCard
+                key={account.id}
+                account={mapAccountToViewModel(account)}
+              />
+            </div>
           ))}
       </div>
     </div>

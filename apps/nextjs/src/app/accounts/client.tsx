@@ -3,12 +3,17 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import type { AccountType, AccountWithBalances } from "@acme/types";
-import { ASSET_ACCOUNT_TYPES, LIABILITY_ACCOUNT_TYPES } from "@acme/types";
+import {
+  ASSET_ACCOUNT_TYPES,
+  ASSET_CATEGORY_ORDER,
+  LIABILITY_ACCOUNT_TYPES,
+  LIABILITY_CATEGORY_ORDER,
+} from "@acme/types";
 
 import { useTRPC } from "~/trpc/react";
 import { AccountsLineChart } from "./AccountsLineChart";
+import { CategorySection } from "./CategorySection";
 import { AccountsProgress } from "./progress";
-import { AccountSection } from "./section";
 import {
   AccountSectionSkeleton,
   AccountsLineChartSkeleton,
@@ -111,6 +116,14 @@ export function AccountsPageClient() {
     return row;
   });
 
+  // Split accounts into assets and liabilities
+  const assetAccounts = accounts.filter((acc) =>
+    ASSET_ACCOUNT_TYPES.has(acc.type),
+  );
+  const liabilityAccounts = accounts.filter((acc) =>
+    LIABILITY_ACCOUNT_TYPES.has(acc.type),
+  );
+
   return (
     <div className="flex w-screen flex-col gap-6 p-6">
       <div className="h-[40vh] w-full">
@@ -119,16 +132,16 @@ export function AccountsPageClient() {
 
       <div className="flex w-full gap-6">
         <div className="flex-1 space-y-4">
-          <AccountSection
+          <CategorySection
             title="Assets"
-            accounts={accounts}
-            allowedTypes={ASSET_ACCOUNT_TYPES}
+            accounts={assetAccounts}
+            categories={ASSET_CATEGORY_ORDER}
           />
 
-          <AccountSection
+          <CategorySection
             title="Liabilities"
-            accounts={accounts}
-            allowedTypes={LIABILITY_ACCOUNT_TYPES}
+            accounts={liabilityAccounts}
+            categories={LIABILITY_CATEGORY_ORDER}
           />
         </div>
 
