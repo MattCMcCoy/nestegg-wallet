@@ -7,7 +7,7 @@ import {
   SidebarHeader,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@acme/ui";
+} from "@nestegg/ui";
 
 const items = [
   {

@@ -1,7 +1,7 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@acme/ui/card";
-import { Button } from "@acme/ui/button";
-import { Skeleton } from "@acme/ui";
-import { Field, FieldLabel } from "@acme/ui/field";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@nestegg/ui/card";
+import { Button } from "@nestegg/ui/button";
+import { Skeleton } from "@nestegg/ui";
+import { Field, FieldLabel } from "@nestegg/ui/field";
 
 export function AccountsLineChartSkeleton() {
   return (

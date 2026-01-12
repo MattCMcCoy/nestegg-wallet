@@ -1,8 +1,8 @@
 "use client";
 
-import type { AccountViewModel } from "@acme/types";
-import { Avatar, AvatarFallback, AvatarImage } from "@acme/ui/avatar";
-import { useTheme } from "@acme/ui/theme";
+import type { AccountViewModel } from "@nestegg/types";
+import { Avatar, AvatarFallback, AvatarImage } from "@nestegg/ui/avatar";
+import { useTheme } from "@nestegg/ui/theme";
 
 export function AccountCard({ account }: { account: AccountViewModel }) {
   const { resolvedTheme } = useTheme();

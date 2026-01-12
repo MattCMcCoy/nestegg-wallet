@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-import { Button } from "@acme/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@acme/ui/card";
+import { Button } from "@nestegg/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@nestegg/ui/card";
 
 interface DayData {
   date: Date;

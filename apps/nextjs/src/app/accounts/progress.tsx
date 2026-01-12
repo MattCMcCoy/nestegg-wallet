@@ -1,4 +1,4 @@
-import type { AccountCategory, AccountWithBalances } from "@acme/types";
+import type { AccountCategory, AccountWithBalances } from "@nestegg/types";
 import {
   ASSET_CATEGORY_ORDER,
   getCategoryColor,
@@ -6,9 +6,9 @@ import {
   groupAccountsByCategory,
   LIABILITY_CATEGORY_ORDER,
   splitAccounts,
-} from "@acme/types";
-import { Progress } from "@acme/ui";
-import { Field, FieldLabel } from "@acme/ui/field";
+} from "@nestegg/types";
+import { Progress } from "@nestegg/ui";
+import { Field, FieldLabel } from "@nestegg/ui/field";
 
 interface AccountsProgressProps {
   accounts: AccountWithBalances[];

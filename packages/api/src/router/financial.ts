@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { and, asc, desc, eq, gte } from "@acme/db";
+import { and, asc, desc, eq, gte } from "@nestegg/db";
 import {
   accountBalances,
   CreateAccountBalanceSchema,
@@ -10,7 +10,7 @@ import {
   financialAccounts,
   financialConnections,
   transactions,
-} from "@acme/db/schema";
+} from "@nestegg/db/schema";
 
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 

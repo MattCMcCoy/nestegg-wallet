@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@acme/tailwind-config/theme";
+@import "@nestegg/tailwind-config/theme";
 
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/jetbrains-mono";

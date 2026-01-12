@@ -7,22 +7,22 @@ import type { VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
 
 import { useIsMobile } from "../hooks/use-mobile";
-import { cn } from "@acme/ui";
-import { Input, Button, Separator } from "@acme/ui";
+import { cn } from "@nestegg/ui";
+import { Input, Button, Separator } from "@nestegg/ui";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@acme/ui";
-import { Skeleton } from "@acme/ui";
+} from "@nestegg/ui";
+import { Skeleton } from "@nestegg/ui";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@acme/ui";
+} from "@nestegg/ui";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;

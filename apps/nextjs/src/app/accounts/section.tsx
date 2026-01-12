@@ -1,5 +1,5 @@
-import type { AccountType, AccountWithBalances } from "@acme/types";
-import { ACCOUNT_TYPE_META, mapAccountToViewModel } from "@acme/types";
+import type { AccountType, AccountWithBalances } from "@nestegg/types";
+import { ACCOUNT_TYPE_META, mapAccountToViewModel } from "@nestegg/types";
 
 import { AccountCard } from "./AccountCard";
 

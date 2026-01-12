@@ -1,11 +1,11 @@
 "use client";
 
-import type { AccountCategory, AccountWithBalances } from "@acme/types";
+import type { AccountCategory, AccountWithBalances } from "@nestegg/types";
 import {
   getAccountsByCategory,
   getCategoryTitle,
   mapAccountToViewModel,
-} from "@acme/types";
+} from "@nestegg/types";
 
 import { AccountCard } from "./AccountCard";
 

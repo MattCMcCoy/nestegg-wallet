@@ -1,5 +1,5 @@
-import type { AccountType } from "@acme/types";
-import { AccountType as AccountTypeEnum } from "@acme/types";
+import type { AccountType } from "@nestegg/types";
+import { AccountType as AccountTypeEnum } from "@nestegg/types";
 
 /**
  * Generate mock financial accounts with balance history

@@ -1,5 +1,5 @@
 {
-  "name": "@acme/api",
+  "name": "@nestegg/api",
   "private": true,
   "type": "module",
   "exports": {
@@ -18,21 +18,21 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@acme/auth": "workspace:*",
-    "@acme/db": "workspace:*",
-    "@acme/types": "workspace:*",
-    "@acme/validators": "workspace:*",
+    "@nestegg/auth": "workspace:*",
+    "@nestegg/db": "workspace:*",
+    "@nestegg/types": "workspace:*",
+    "@nestegg/validators": "workspace:*",
     "@trpc/server": "catalog:",
     "superjson": "2.2.3",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:*",
-    "@acme/prettier-config": "workspace:*",
-    "@acme/tsconfig": "workspace:*",
+    "@nestegg/eslint-config": "workspace:*",
+    "@nestegg/prettier-config": "workspace:*",
+    "@nestegg/tsconfig": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@nestegg/prettier-config"
 }

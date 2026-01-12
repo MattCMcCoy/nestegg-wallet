@@ -87,7 +87,7 @@ importers:
         specifier: ^17.2.3
         version: 17.2.3
     devDependencies:
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:tooling/prettier
       '@turbo/gen':
@@ -193,19 +193,19 @@ importers:
         specifier: 2.2.3
         version: 2.2.3
     devDependencies:
-      '@acme/api':
+      '@nestegg/api':
         specifier: workspace:*
         version: link:../../packages/api
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tailwind-config':
+      '@nestegg/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/react':
@@ -226,22 +226,22 @@ importers:
 
   apps/nextjs:
     dependencies:
-      '@acme/api':
+      '@nestegg/api':
         specifier: workspace:*
         version: link:../../packages/api
-      '@acme/auth':
+      '@nestegg/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@acme/db':
+      '@nestegg/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@acme/types':
+      '@nestegg/types':
         specifier: workspace:*
         version: link:../../packages/types
-      '@acme/ui':
+      '@nestegg/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@acme/validators':
+      '@nestegg/validators':
         specifier: workspace:*
         version: link:../../packages/validators
       '@t3-oss/env-nextjs':
@@ -287,16 +287,16 @@ importers:
         specifier: 'catalog:'
         version: 4.3.5
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tailwind-config':
+      '@nestegg/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -329,24 +329,24 @@ importers:
 
   apps/tanstack-start:
     dependencies:
-      '@acme/api':
-        specifier: workspace:*
-        version: link:../../packages/api
-      '@acme/auth':
-        specifier: workspace:*
-        version: link:../../packages/auth
-      '@acme/db':
-        specifier: workspace:*
-        version: link:../../packages/db
-      '@acme/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
       '@fontsource-variable/inter':
         specifier: ^5.2.8
         version: 5.2.8
       '@fontsource-variable/jetbrains-mono':
         specifier: ^5.2.8
         version: 5.2.8
+      '@nestegg/api':
+        specifier: workspace:*
+        version: link:../../packages/api
+      '@nestegg/auth':
+        specifier: workspace:*
+        version: link:../../packages/auth
+      '@nestegg/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@nestegg/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@t3-oss/env-core':
         specifier: ^0.13.8
         version: 0.13.10(typescript@5.9.3)(zod@4.3.5)
@@ -396,16 +396,16 @@ importers:
         specifier: 'catalog:'
         version: 4.3.5
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tailwind-config':
+      '@nestegg/tailwind-config':
         specifier: workspace:*
         version: link:../../tooling/tailwind
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@tailwindcss/vite':
@@ -444,16 +444,16 @@ importers:
 
   packages/api:
     dependencies:
-      '@acme/auth':
+      '@nestegg/auth':
         specifier: workspace:*
         version: link:../auth
-      '@acme/db':
+      '@nestegg/db':
         specifier: workspace:*
         version: link:../db
-      '@acme/types':
+      '@nestegg/types':
         specifier: workspace:*
         version: link:../types
-      '@acme/validators':
+      '@nestegg/validators':
         specifier: workspace:*
         version: link:../validators
       '@trpc/server':
@@ -466,13 +466,13 @@ importers:
         specifier: 'catalog:'
         version: 4.3.5
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -487,12 +487,12 @@ importers:
 
   packages/auth:
     dependencies:
-      '@acme/db':
-        specifier: workspace:*
-        version: link:../db
       '@better-auth/expo':
         specifier: 'catalog:'
         version: 1.4.0-beta.9(better-auth@1.4.0-beta.9(better-sqlite3@12.6.0)(react-dom@19.1.4(react@19.1.4))(react@19.1.4))(expo-constants@18.0.13)(expo-crypto@15.0.8(expo@54.0.31))(expo-linking@8.0.11)(expo-secure-store@15.0.8(expo@54.0.31))(expo-web-browser@15.0.10(expo@54.0.31)(react-native@0.81.5(@babel/core@7.28.5)(@types/react@19.1.17)(react@19.1.4)))
+      '@nestegg/db':
+        specifier: workspace:*
+        version: link:../db
       '@t3-oss/env-core':
         specifier: ^0.13.8
         version: 0.13.10(typescript@5.9.3)(zod@4.3.5)
@@ -503,18 +503,18 @@ importers:
         specifier: 'catalog:'
         version: 4.3.5
     devDependencies:
-      '@acme/eslint-config':
-        specifier: workspace:*
-        version: link:../../tooling/eslint
-      '@acme/prettier-config':
-        specifier: workspace:*
-        version: link:../../tooling/prettier
-      '@acme/tsconfig':
-        specifier: workspace:*
-        version: link:../../tooling/typescript
       '@better-auth/cli':
         specifier: 'catalog:'
         version: 1.4.0-beta.9(@types/react@19.1.17)(kysely@0.28.9)(postgres@3.4.8)(react-dom@19.1.4(react@19.1.4))(react@19.1.4)
+      '@nestegg/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@nestegg/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@nestegg/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
       eslint:
         specifier: 'catalog:'
         version: 9.39.2(jiti@2.6.1)
@@ -543,13 +543,13 @@ importers:
         specifier: 'catalog:'
         version: 4.3.5
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/node':
@@ -570,13 +570,13 @@ importers:
 
   packages/types:
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/react':
@@ -640,13 +640,13 @@ importers:
         specifier: ^3.3.1
         version: 3.4.0
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       '@types/react':
@@ -674,13 +674,13 @@ importers:
         specifier: 'catalog:'
         version: 4.3.5
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
       eslint:
@@ -723,10 +723,10 @@ importers:
         specifier: ^8.46.2
         version: 8.52.0(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
     devDependencies:
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../prettier
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
@@ -756,7 +756,7 @@ importers:
         specifier: ^0.7.1
         version: 0.7.2(@ianvs/prettier-plugin-sort-imports@4.7.0(prettier@3.7.4))(prettier@3.7.4)
     devDependencies:
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':
@@ -778,13 +778,13 @@ importers:
         specifier: 'catalog:'
         version: 4.1.18
     devDependencies:
-      '@acme/eslint-config':
+      '@nestegg/eslint-config':
         specifier: workspace:*
         version: link:../eslint
-      '@acme/prettier-config':
+      '@nestegg/prettier-config':
         specifier: workspace:*
         version: link:../prettier
-      '@acme/tsconfig':
+      '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../typescript
       '@types/node':

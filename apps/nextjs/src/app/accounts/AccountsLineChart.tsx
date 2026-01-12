@@ -9,7 +9,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { Button } from "@acme/ui/button";
+import { Button } from "@nestegg/ui/button";
 import {
   Card,
   CardContent,
@@ -17,9 +17,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@acme/ui/card";
-import { ChartTooltip, ChartTooltipContent } from "@acme/ui/chart";
-import { useTheme } from "@acme/ui/theme";
+} from "@nestegg/ui/card";
+import { ChartTooltip, ChartTooltipContent } from "@nestegg/ui/chart";
+import { useTheme } from "@nestegg/ui/theme";
 
 type ChartRow = {
   date: string;

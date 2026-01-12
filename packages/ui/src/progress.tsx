@@ -3,7 +3,7 @@
 import type * as React from "react";
 import * as ProgressPrimitive from "@radix-ui/react-progress";
 
-import { cn } from "@acme/ui";
+import { cn } from "@nestegg/ui";
 
 function Progress({
   className,

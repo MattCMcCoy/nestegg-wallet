@@ -1,5 +1,5 @@
 import type * as React from "react";
-import { cn } from "@acme/ui";
+import { cn } from "@nestegg/ui";
 
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (

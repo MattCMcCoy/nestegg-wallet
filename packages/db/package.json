@@ -1,5 +1,5 @@
 {
-  "name": "@acme/db",
+  "name": "@nestegg/db",
   "private": true,
   "type": "module",
   "exports": {
@@ -38,14 +38,14 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:*",
-    "@acme/prettier-config": "workspace:*",
-    "@acme/tsconfig": "workspace:*",
+    "@nestegg/eslint-config": "workspace:*",
+    "@nestegg/prettier-config": "workspace:*",
+    "@nestegg/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "drizzle-kit": "^0.31.5",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@nestegg/prettier-config"
 }

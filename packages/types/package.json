@@ -1,5 +1,5 @@
 {
-  "name": "@acme/types",
+  "name": "@nestegg/types",
   "private": true,
   "type": "module",
   "exports": {
@@ -14,9 +14,9 @@
     "ui-add": "pnpm dlx shadcn@latest add && prettier src --write --list-different"
   },
   "devDependencies": {
-    "@acme/eslint-config": "workspace:*",
-    "@acme/prettier-config": "workspace:*",
-    "@acme/tsconfig": "workspace:*",
+    "@nestegg/eslint-config": "workspace:*",
+    "@nestegg/prettier-config": "workspace:*",
+    "@nestegg/tsconfig": "workspace:*",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
     "prettier": "catalog:",
@@ -28,5 +28,5 @@
     "react": "catalog:react19",
     "zod": "catalog:"
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@nestegg/prettier-config"
 }

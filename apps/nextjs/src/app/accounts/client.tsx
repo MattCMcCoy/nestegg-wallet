@@ -2,13 +2,13 @@
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import type { AccountType, AccountWithBalances } from "@acme/types";
+import type { AccountType, AccountWithBalances } from "@nestegg/types";
 import {
   ASSET_ACCOUNT_TYPES,
   ASSET_CATEGORY_ORDER,
   LIABILITY_ACCOUNT_TYPES,
   LIABILITY_CATEGORY_ORDER,
-} from "@acme/types";
+} from "@nestegg/types";
 
 import { useTRPC } from "~/trpc/react";
 import { AccountsLineChart } from "./AccountsLineChart";

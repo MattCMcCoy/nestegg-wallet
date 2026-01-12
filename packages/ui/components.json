@@ -10,9 +10,9 @@
     "cssVariables": true
   },
   "aliases": {
-    "components": "@acme/ui",
-    "ui": "@acme/ui",
-    "utils": "@acme/ui",
-    "hooks": "@acme/hooks"
+    "components": "@nestegg/ui",
+    "ui": "@nestegg/ui",
+    "utils": "@nestegg/ui",
+    "hooks": "@nestegg/hooks"
   }
 }
