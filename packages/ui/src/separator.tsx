@@ -2,6 +2,7 @@
 
 import type * as React from "react";
 import * as SeparatorPrimitive from "@radix-ui/react-separator";
+
 import { cn } from "@nestegg/ui";
 
 function Separator({

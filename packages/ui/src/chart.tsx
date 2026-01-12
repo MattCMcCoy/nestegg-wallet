@@ -126,16 +126,19 @@ function ChartTooltipContent({
 
   return (
     <div
-      className={`bg-background border-border/50 grid gap-1.5 rounded-lg border p-2 text-xs shadow ${className || ""}`}
+      className={`bg-background border-border/50 grid gap-1.5 rounded-lg border p-2 text-xs shadow ${className ?? ""}`}
     >
       {/* Date at the top */}
       <div className="font-medium">
         {label &&
-          new Date(label).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "numeric",
-          })}
+          new Date(label as string | number | Date).toLocaleDateString(
+            "en-US",
+            {
+              month: "short",
+              day: "numeric",
+              year: "numeric",
+            },
+          )}
       </div>
 
       {/* Each line / account */}
@@ -181,12 +184,12 @@ function ChartLegendContent({
       {payload
         .filter((item) => item.type !== "none")
         .map((item) => {
-          const key = `${nameKey || item.dataKey || "value"}`;
+          const key = `${nameKey ?? item.dataKey ?? "value"}`;
           const itemConfig = getPayloadConfigFromPayload(config, item, key);
 
           return (
             <div
-              key={item.value}
+              key={String(item.value ?? item.dataKey ?? Math.random())}
               className={cn(
                 "[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3",
               )}

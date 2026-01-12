@@ -5,10 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@nestegg/ui/avatar";
 import { useTheme } from "@nestegg/ui/theme";
 
 export function AccountCard({ account }: { account: AccountViewModel }) {
-  const { resolvedTheme } = useTheme();
-  const axisColor = resolvedTheme === "dark" ? "#fff" : "#000";
-  const gridColor = resolvedTheme === "dark" ? "#374151" : "#e5e7eb";
-
   return (
     <div className="flex items-center gap-4">
       <Avatar>
@@ -37,4 +33,3 @@ export function AccountCard({ account }: { account: AccountViewModel }) {
     </div>
   );
 }
-

@@ -1,4 +1,3 @@
-import type { AccountType } from "@nestegg/types";
 import { AccountType as AccountTypeEnum } from "@nestegg/types";
 
 /**
@@ -29,7 +28,14 @@ export function generateMockAccounts(userId: string) {
       currency: "USD",
       createdAt: threeYearsAgo,
       updatedAt: now,
-      balances: generateBalanceHistory(5000, 8000, threeYearsAgo, now, false, account1Id),
+      balances: generateBalanceHistory(
+        5000,
+        8000,
+        threeYearsAgo,
+        now,
+        false,
+        account1Id,
+      ),
     },
     {
       id: account2Id,
@@ -42,7 +48,14 @@ export function generateMockAccounts(userId: string) {
       currency: "USD",
       createdAt: threeYearsAgo,
       updatedAt: now,
-      balances: generateBalanceHistory(25000, 35000, threeYearsAgo, now, false, account2Id),
+      balances: generateBalanceHistory(
+        25000,
+        35000,
+        threeYearsAgo,
+        now,
+        false,
+        account2Id,
+      ),
     },
     {
       id: account3Id,
@@ -55,7 +68,13 @@ export function generateMockAccounts(userId: string) {
       currency: "USD",
       createdAt: threeYearsAgo,
       updatedAt: now,
-      balances: generateCreditBalanceHistory(2000, 5000, threeYearsAgo, now, account3Id),
+      balances: generateCreditBalanceHistory(
+        2000,
+        5000,
+        threeYearsAgo,
+        now,
+        account3Id,
+      ),
     },
     {
       id: account4Id,
@@ -68,7 +87,14 @@ export function generateMockAccounts(userId: string) {
       currency: "USD",
       createdAt: threeYearsAgo,
       updatedAt: now,
-      balances: generateBalanceHistory(15000, 25000, threeYearsAgo, now, true, account4Id),
+      balances: generateBalanceHistory(
+        15000,
+        25000,
+        threeYearsAgo,
+        now,
+        true,
+        account4Id,
+      ),
     },
     {
       id: account5Id,
@@ -81,7 +107,13 @@ export function generateMockAccounts(userId: string) {
       currency: "USD",
       createdAt: threeYearsAgo,
       updatedAt: now,
-      balances: generateLoanBalanceHistory(18000, 5000, threeYearsAgo, now, account5Id),
+      balances: generateLoanBalanceHistory(
+        18000,
+        5000,
+        threeYearsAgo,
+        now,
+        account5Id,
+      ),
     },
     {
       id: account6Id,
@@ -94,7 +126,14 @@ export function generateMockAccounts(userId: string) {
       currency: "USD",
       createdAt: threeYearsAgo,
       updatedAt: now,
-      balances: generateBalanceHistory(120000, 180000, threeYearsAgo, now, true, account6Id),
+      balances: generateBalanceHistory(
+        120000,
+        180000,
+        threeYearsAgo,
+        now,
+        true,
+        account6Id,
+      ),
     },
   ];
 
@@ -112,7 +151,7 @@ function generateBalanceHistory(
   volatile = false,
   accountId: string,
 ) {
-  const balances: Array<{
+  const balances: {
     id: string;
     accountId: string;
     current: string;
@@ -121,7 +160,7 @@ function generateBalanceHistory(
     isoCurrencyCode: string | null;
     asOf: Date;
     createdAt: Date;
-  }> = [];
+  }[] = [];
 
   const months = Math.ceil(
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 30),
@@ -166,7 +205,7 @@ function generateCreditBalanceHistory(
   endDate: Date,
   accountId: string,
 ) {
-  const balances: Array<{
+  const balances: {
     id: string;
     accountId: string;
     current: string;
@@ -175,7 +214,7 @@ function generateCreditBalanceHistory(
     isoCurrencyCode: string | null;
     asOf: Date;
     createdAt: Date;
-  }> = [];
+  }[] = [];
 
   const months = Math.ceil(
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 30),
@@ -187,7 +226,10 @@ function generateCreditBalanceHistory(
 
   for (let i = 0; i <= months; i++) {
     const fluctuation = currentBalance * 0.1 * (Math.random() - 0.5) * 2;
-    const balance = Math.max(0, Math.min(creditLimit, currentBalance + fluctuation));
+    const balance = Math.max(
+      0,
+      Math.min(creditLimit, currentBalance + fluctuation),
+    );
     const available = creditLimit - balance;
 
     balances.push({
@@ -218,7 +260,7 @@ function generateLoanBalanceHistory(
   endDate: Date,
   accountId: string,
 ) {
-  const balances: Array<{
+  const balances: {
     id: string;
     accountId: string;
     current: string;
@@ -227,7 +269,7 @@ function generateLoanBalanceHistory(
     isoCurrencyCode: string | null;
     asOf: Date;
     createdAt: Date;
-  }> = [];
+  }[] = [];
 
   const months = Math.ceil(
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24 * 30),
@@ -255,4 +297,3 @@ function generateLoanBalanceHistory(
 
   return balances;
 }
-

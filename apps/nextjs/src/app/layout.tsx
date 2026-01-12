@@ -21,10 +21,12 @@ export const metadata: Metadata = {
       : "http://localhost:3000",
   ),
   title: "Nestegg Wallet",
-  description: "Track your finances with a comprehensive view of your accounts, balances, and spending",
+  description:
+    "Track your finances with a comprehensive view of your accounts, balances, and spending",
   openGraph: {
     title: "Nestegg Wallet",
-    description: "Track your finances with a comprehensive view of your accounts, balances, and spending",
+    description:
+      "Track your finances with a comprehensive view of your accounts, balances, and spending",
     url: env.VERCEL_PROJECT_PRODUCTION_URL
       ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`
       : "http://localhost:3000",

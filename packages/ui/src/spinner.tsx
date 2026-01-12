@@ -1,4 +1,5 @@
 import { Loader2Icon } from "lucide-react";
+
 import { cn } from "@nestegg/ui";
 
 function Spinner({ className, ...props }: React.ComponentProps<"svg">) {

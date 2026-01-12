@@ -578,6 +578,9 @@ importers:
       '@nestegg/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/node':
+        specifier: 'catalog:'
+        version: 22.18.12
       '@types/react':
         specifier: catalog:react19
         version: 19.1.17

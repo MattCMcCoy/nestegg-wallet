@@ -17,6 +17,7 @@
     "@nestegg/eslint-config": "workspace:*",
     "@nestegg/prettier-config": "workspace:*",
     "@nestegg/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
     "@types/react": "catalog:react19",
     "eslint": "catalog:",
     "prettier": "catalog:",

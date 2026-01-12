@@ -1,6 +1,12 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@nestegg/ui/card";
-import { Button } from "@nestegg/ui/button";
 import { Skeleton } from "@nestegg/ui";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@nestegg/ui/card";
 import { Field, FieldLabel } from "@nestegg/ui/field";
 
 export function AccountsLineChartSkeleton() {
@@ -90,4 +96,3 @@ export function AccountsProgressSkeleton() {
     </div>
   );
 }
-
