@@ -50,7 +50,8 @@ client
       message: error.message,
       code: error.code,
       hostname: new URL(connectionString).hostname,
-      hint: "Please check:\n" +
+      hint:
+        "Please check:\n" +
         "1. Your database is running and accessible\n" +
         "2. The POSTGRES_URL is correct\n" +
         "3. If using Supabase, ensure your database is not paused\n" +

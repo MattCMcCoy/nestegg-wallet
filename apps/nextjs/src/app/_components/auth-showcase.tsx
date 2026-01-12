@@ -10,13 +10,15 @@ async function signInAction() {
   try {
     const headersList = await headers();
     console.log("Attempting Discord sign-in...");
-    
+
     // Validate environment variables are present
     if (!process.env.AUTH_DISCORD_ID || !process.env.AUTH_DISCORD_SECRET) {
       console.error("Missing Discord OAuth credentials");
-      throw new Error("Discord OAuth is not configured. Please set AUTH_DISCORD_ID and AUTH_DISCORD_SECRET.");
+      throw new Error(
+        "Discord OAuth is not configured. Please set AUTH_DISCORD_ID and AUTH_DISCORD_SECRET.",
+      );
     }
-    
+
     const res = await auth.api.signInSocial({
       headers: headersList,
       body: {
@@ -27,12 +29,19 @@ async function signInAction() {
     console.log("Sign-in response:", { hasUrl: !!res.url, res });
     if (!res.url) {
       console.error("No URL returned from signInSocial", res);
-      throw new Error("No URL returned from signInSocial. Please check your Discord OAuth configuration.");
+      throw new Error(
+        "No URL returned from signInSocial. Please check your Discord OAuth configuration.",
+      );
     }
     redirect(res.url);
   } catch (error) {
     // Don't re-throw redirect errors (they're expected)
-    if (error && typeof error === "object" && "digest" in error && error.digest?.startsWith("NEXT_REDIRECT")) {
+    if (
+      error &&
+      typeof error === "object" &&
+      "digest" in error &&
+      error.digest?.startsWith("NEXT_REDIRECT")
+    ) {
       throw error;
     }
     console.error("Sign in error details:", {
