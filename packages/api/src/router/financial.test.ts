@@ -9,7 +9,8 @@ vi.mock("@nestegg/db/client", () => ({
       financialAccounts: {
         findMany: vi.fn(),
       },
-} as unknown,
+    },
+  } as unknown,
 }));
 
 describe("Financial Router", () => {
