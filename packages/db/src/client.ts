@@ -22,7 +22,7 @@ try {
 } catch (error) {
   if (error instanceof TypeError) {
     throw new Error(
-      `Invalid POSTGRES_URL format: ${connectionString}. Expected a valid PostgreSQL connection string.`,
+      "Invalid POSTGRES_URL format. Expected a valid PostgreSQL connection string.",
     );
   }
   throw error;
@@ -45,11 +45,31 @@ client
   .then(() => {
     console.log("✅ Database connection successful");
   })
-  .catch((error) => {
+  .catch((error: unknown) => {
+    // Sanitize error message to avoid exposing connection string credentials
+    let errorMessage = "Database connection failed";
+    if (error instanceof Error) {
+      // Remove any potential connection string from error message
+      errorMessage = error.message.replace(
+        /postgres(ql)?:\/\/[^@]+@/gi,
+        "postgresql://***:***@",
+      );
+    }
+    const errorCode =
+      error && typeof error === "object" && "code" in error
+        ? String(error.code)
+        : undefined;
+    let hostname: string | undefined;
+    try {
+      hostname = new URL(connectionString).hostname;
+    } catch {
+      // If URL parsing fails, don't expose hostname
+      hostname = undefined;
+    }
     console.error("❌ Database connection failed:", {
-      message: error.message,
-      code: error.code,
-      hostname: new URL(connectionString).hostname,
+      message: errorMessage,
+      code: errorCode,
+      hostname,
       hint:
         "Please check:\n" +
         "1. Your database is running and accessible\n" +

@@ -4,15 +4,15 @@ import { redirect } from "next/navigation";
 import { Button } from "@nestegg/ui/button";
 
 import { auth, getSession } from "~/auth/server";
+import { env } from "~/env";
 
 async function signInAction() {
   "use server";
   try {
     const headersList = await headers();
-    console.log("Attempting Discord sign-in...");
 
     // Validate environment variables are present
-    if (!process.env.AUTH_DISCORD_ID || !process.env.AUTH_DISCORD_SECRET) {
+    if (!env.AUTH_DISCORD_ID || !env.AUTH_DISCORD_SECRET) {
       console.error("Missing Discord OAuth credentials");
       throw new Error(
         "Discord OAuth is not configured. Please set AUTH_DISCORD_ID and AUTH_DISCORD_SECRET.",
@@ -26,13 +26,13 @@ async function signInAction() {
         callbackURL: "/",
       },
     });
-    console.log("Sign-in response:", { hasUrl: !!res.url, res });
     if (!res.url) {
-      console.error("No URL returned from signInSocial", res);
+      console.error("No URL returned from signInSocial");
       throw new Error(
         "No URL returned from signInSocial. Please check your Discord OAuth configuration.",
       );
     }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     redirect(res.url);
   } catch (error) {
     // Don't re-throw redirect errors (they're expected)
@@ -40,7 +40,8 @@ async function signInAction() {
       error &&
       typeof error === "object" &&
       "digest" in error &&
-      error.digest?.startsWith("NEXT_REDIRECT")
+      typeof error.digest === "string" &&
+      error.digest.startsWith("NEXT_REDIRECT")
     ) {
       throw error;
     }
@@ -88,8 +89,19 @@ export async function AuthShowcase() {
               await auth.api.signOut({
                 headers: await headers(),
               });
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
               redirect("/");
             } catch (error) {
+              // Don't log redirect errors (they're expected)
+              if (
+                error &&
+                typeof error === "object" &&
+                "digest" in error &&
+                typeof error.digest === "string" &&
+                error.digest.startsWith("NEXT_REDIRECT")
+              ) {
+                throw error;
+              }
               console.error("Sign out error:", error);
               throw error;
             }

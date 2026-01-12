@@ -1,13 +1,10 @@
 import { HydrateClient, prefetch, trpc } from "~/trpc/server";
 import { AccountsPageClient } from "./client";
 
-export default async function AccountsPage() {
-  try {
-    prefetch(trpc.financial.overview.queryOptions());
-  } catch (error) {
-    // If prefetch fails (e.g., user not authenticated), continue without prefetching
-    console.error("Failed to prefetch financial overview:", error);
-  }
+export default function AccountsPage() {
+  // Prefetch is fire-and-forget; errors are handled silently.
+  // If prefetch fails, the client will fetch the data on mount.
+  prefetch(trpc.financial.overview.queryOptions());
 
   return (
     <HydrateClient>
