@@ -2,7 +2,6 @@
 
 import type { AccountViewModel } from "@nestegg/types";
 import { Avatar, AvatarFallback, AvatarImage } from "@nestegg/ui/avatar";
-import { useTheme } from "@nestegg/ui/theme";
 
 export function AccountCard({ account }: { account: AccountViewModel }) {
   return (

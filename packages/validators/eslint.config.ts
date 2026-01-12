@@ -4,7 +4,7 @@ import { baseConfig } from "@nestegg/eslint-config/base";
 
 export default defineConfig(
   {
-    ignores: ["dist/**"],
+    ignores: ["dist/**", "src/index.js"],
   },
   baseConfig,
 );
