@@ -1,6 +1,9 @@
 import { HydrateClient } from "~/trpc/server";
 import { AuthShowcase } from "./_components/auth-showcase";
 
+// Force dynamic rendering since we need to check authentication status
+export const dynamic = "force-dynamic";
+
 export default function HomePage() {
   return (
     <HydrateClient>
