@@ -57,7 +57,6 @@ export function prefetch(queryOptions: {
   const isInfiniteQuery =
     secondKey !== null &&
     typeof secondKey === "object" &&
-    secondKey !== undefined &&
     "type" in secondKey &&
     typeof (secondKey as { type?: unknown }).type === "string" &&
     (secondKey as { type: string }).type === "infinite";
