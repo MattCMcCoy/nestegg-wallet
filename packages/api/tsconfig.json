@@ -1,10 +1,6 @@
 {
   "extends": "@nestegg/tsconfig/compiled-package.json",
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "vitest.setup.ts"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vitest.setup.ts"],
   "exclude": [
     "node_modules",
     "src/**/*.test.ts",

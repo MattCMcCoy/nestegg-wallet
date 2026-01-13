@@ -52,10 +52,12 @@ export function prefetch(queryOptions: {
   const queryClient = getQueryClient();
   const queryKey = queryOptions.queryKey;
   // Check if this is an infinite query by examining the query key structure
-  const secondKey = Array.isArray(queryKey) && queryKey[1] ? queryKey[1] : null;
+  const secondKey: unknown =
+    Array.isArray(queryKey) && queryKey.length > 1 ? queryKey[1] : null;
   const isInfiniteQuery =
     secondKey !== null &&
     typeof secondKey === "object" &&
+    secondKey !== undefined &&
     "type" in secondKey &&
     typeof (secondKey as { type?: unknown }).type === "string" &&
     (secondKey as { type: string }).type === "infinite";
