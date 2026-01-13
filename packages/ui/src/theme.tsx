@@ -64,12 +64,19 @@ const setupPreferredListener = () => {
 };
 
 const getNextTheme = (current: ThemeMode): ThemeMode => {
-  const themes: ThemeMode[] =
+  const themes: readonly [ThemeMode, ThemeMode, ThemeMode] =
     getSystemTheme() === "dark"
-      ? ["auto", "light", "dark"]
-      : ["auto", "dark", "light"];
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return themes[(themes.indexOf(current) + 1) % themes.length]!;
+      ? (["auto", "light", "dark"] as const)
+      : (["auto", "dark", "light"] as const);
+  const currentIndex = themes.indexOf(current);
+  // Modulo arithmetic ensures nextIndex is always 0, 1, or 2
+  const nextIndex = (currentIndex + 1) % 3;
+  // Type guard to ensure TypeScript knows the index is valid
+  if (nextIndex === 0) return themes[0];
+  if (nextIndex === 1) return themes[1];
+  if (nextIndex === 2) return themes[2];
+  // This should never happen due to modulo arithmetic
+  return themes[0];
 };
 
 export const themeDetectorScript = (function () {

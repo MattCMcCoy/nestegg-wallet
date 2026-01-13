@@ -4,29 +4,69 @@ import { redirect } from "next/navigation";
 import { Button } from "@nestegg/ui/button";
 
 import { auth, getSession } from "~/auth/server";
+import { env } from "~/env";
+
+async function signInAction() {
+  "use server";
+  try {
+    const headersList = await headers();
+
+    // Validate environment variables are present
+    if (!env.AUTH_DISCORD_ID || !env.AUTH_DISCORD_SECRET) {
+      console.error("Missing Discord OAuth credentials");
+      throw new Error(
+        "Discord OAuth is not configured. Please set AUTH_DISCORD_ID and AUTH_DISCORD_SECRET.",
+      );
+    }
+
+    const res = await auth.api.signInSocial({
+      headers: headersList,
+      body: {
+        provider: "discord",
+        callbackURL: "/",
+      },
+    });
+    if (!res.url) {
+      console.error("No URL returned from signInSocial");
+      throw new Error(
+        "No URL returned from signInSocial. Please check your Discord OAuth configuration.",
+      );
+    }
+    redirect(res.url);
+  } catch (error) {
+    // Don't re-throw redirect errors (they're expected)
+    if (
+      error &&
+      typeof error === "object" &&
+      "digest" in error &&
+      typeof error.digest === "string" &&
+      error.digest.startsWith("NEXT_REDIRECT")
+    ) {
+      throw error;
+    }
+    console.error("Sign in error details:", {
+      error,
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
+    // Re-throw to show error to user via Next.js error handling
+    throw error;
+  }
+}
 
 export async function AuthShowcase() {
-  const session = await getSession();
+  let session;
+  try {
+    session = await getSession();
+  } catch (error) {
+    console.error("Failed to get session in AuthShowcase:", error);
+    session = null;
+  }
 
   if (!session) {
     return (
-      <form>
-        <Button
-          size="lg"
-          formAction={async () => {
-            "use server";
-            const res = await auth.api.signInSocial({
-              body: {
-                provider: "discord",
-                callbackURL: "/",
-              },
-            });
-            if (!res.url) {
-              throw new Error("No URL returned from signInSocial");
-            }
-            redirect(res.url);
-          }}
-        >
+      <form action={signInAction}>
+        <Button size="lg" type="submit">
           Sign in with Discord
         </Button>
       </form>
@@ -44,10 +84,25 @@ export async function AuthShowcase() {
           size="lg"
           formAction={async () => {
             "use server";
-            await auth.api.signOut({
-              headers: await headers(),
-            });
-            redirect("/");
+            try {
+              await auth.api.signOut({
+                headers: await headers(),
+              });
+              redirect("/");
+            } catch (error) {
+              // Don't log redirect errors (they're expected)
+              if (
+                error &&
+                typeof error === "object" &&
+                "digest" in error &&
+                typeof error.digest === "string" &&
+                error.digest.startsWith("NEXT_REDIRECT")
+              ) {
+                throw error;
+              }
+              console.error("Sign out error:", error);
+              throw error;
+            }
           }}
         >
           Sign out

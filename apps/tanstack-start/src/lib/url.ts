@@ -11,6 +11,6 @@ export function getBaseUrl() {
     return `https://${env.VERCEL_URL}`;
   }
 
-  // eslint-disable-next-line no-restricted-properties
-  return `http://localhost:${process.env.PORT ?? 3001}`;
+  // Default to port 3001 for local development
+  return "http://localhost:3001";
 }

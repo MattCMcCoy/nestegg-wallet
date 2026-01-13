@@ -10,9 +10,15 @@ import { env } from "~/env";
 
 const baseUrl =
   env.VERCEL_ENV === "production"
-    ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`
+    ? env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : env.VERCEL_URL
+        ? `https://${env.VERCEL_URL}`
+        : "http://localhost:3000"
     : env.VERCEL_ENV === "preview"
-      ? `https://${env.VERCEL_URL}`
+      ? env.VERCEL_URL
+        ? `https://${env.VERCEL_URL}`
+        : "http://localhost:3000"
       : "http://localhost:3000";
 
 export const auth = initAuth({
@@ -26,6 +32,15 @@ export const auth = initAuth({
   extraPlugins: [nextCookies()],
 });
 
-export const getSession = cache(async () =>
-  auth.api.getSession({ headers: await headers() }),
-);
+export const getSession = cache(async () => {
+  try {
+    const headersList = await headers();
+    return await auth.api.getSession({ headers: headersList });
+  } catch (error) {
+    console.error("Error getting session:", {
+      error,
+      message: error instanceof Error ? error.message : String(error),
+    });
+    return null;
+  }
+});

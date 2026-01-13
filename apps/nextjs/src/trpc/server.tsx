@@ -1,4 +1,4 @@
-import type { TRPCQueryOptions } from "@trpc/tanstack-react-query";
+import type { FetchQueryOptions } from "@tanstack/react-query";
 import { cache } from "react";
 import { headers } from "next/headers";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -40,15 +40,38 @@ export function HydrateClient(props: { children: React.ReactNode }) {
     </HydrationBoundary>
   );
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function prefetch<T extends ReturnType<TRPCQueryOptions<any>>>(
-  queryOptions: T,
-) {
+
+/**
+ * Prefetch a tRPC query on the server.
+ * This is a fire-and-forget operation; errors are handled silently.
+ */
+export function prefetch(queryOptions: {
+  queryKey: readonly unknown[];
+  queryFn?: unknown;
+}) {
   const queryClient = getQueryClient();
-  if (queryOptions.queryKey[1]?.type === "infinite") {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any
-    void queryClient.prefetchInfiniteQuery(queryOptions as any);
+  const queryKey = queryOptions.queryKey;
+  // Check if this is an infinite query by examining the query key structure
+  const secondKey: unknown =
+    Array.isArray(queryKey) && queryKey.length > 1 ? queryKey[1] : null;
+  const isInfiniteQuery =
+    secondKey !== null &&
+    typeof secondKey === "object" &&
+    "type" in secondKey &&
+    typeof (secondKey as { type?: unknown }).type === "string" &&
+    (secondKey as { type: string }).type === "infinite";
+
+  if (isInfiniteQuery) {
+    // For infinite queries, cast through unknown first to avoid type errors
+    void queryClient.prefetchInfiniteQuery(
+      queryOptions as unknown as Parameters<
+        typeof queryClient.prefetchInfiniteQuery
+      >[0],
+    );
   } else {
-    void queryClient.prefetchQuery(queryOptions);
+    // For regular queries, cast to FetchQueryOptions
+    void queryClient.prefetchQuery(
+      queryOptions as unknown as FetchQueryOptions<unknown, unknown, unknown>,
+    );
   }
 }
