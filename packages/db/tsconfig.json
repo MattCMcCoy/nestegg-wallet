@@ -1,12 +1,13 @@
 {
   "extends": "@nestegg/tsconfig/base.json",
-  "include": ["src/**/*.ts", "src/**/*.tsx", "*.ts"],
-  "exclude": [
-    "node_modules",
-    "eslint.config.ts",
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "src/**/*.test.ts",
     "src/**/*.test.tsx",
     "src/**/*.spec.ts",
-    "src/**/*.spec.tsx"
-  ]
+    "src/**/*.spec.tsx",
+    "*.ts"
+  ],
+  "exclude": ["node_modules", "eslint.config.ts"]
 }

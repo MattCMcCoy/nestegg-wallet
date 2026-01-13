@@ -1,10 +1,10 @@
 import { afterAll, beforeAll } from "vitest";
 
-// Helper to safely set environment variables in test environment
+// Helper to set environment variables in test environment
+// In Node.js, process is always defined, so we can safely access it
 function setEnvVar(key: string, value: string): void {
-  if (typeof process !== "undefined" && process.env) {
-    process.env[key] = value;
-  }
+  // eslint-disable-next-line no-restricted-properties
+  process.env[key] = value;
 }
 
 // Mock environment variables for API tests

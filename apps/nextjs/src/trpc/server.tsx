@@ -52,13 +52,15 @@ export function prefetch(queryOptions: {
   const queryClient = getQueryClient();
   const queryKey = queryOptions.queryKey;
   // Check if this is an infinite query by examining the query key structure
-  if (
-    Array.isArray(queryKey) &&
-    queryKey[1] &&
-    typeof queryKey[1] === "object" &&
-    "type" in queryKey[1] &&
-    queryKey[1].type === "infinite"
-  ) {
+  const secondKey = Array.isArray(queryKey) && queryKey[1] ? queryKey[1] : null;
+  const isInfiniteQuery =
+    secondKey !== null &&
+    typeof secondKey === "object" &&
+    "type" in secondKey &&
+    typeof (secondKey as { type?: unknown }).type === "string" &&
+    (secondKey as { type: string }).type === "infinite";
+
+  if (isInfiniteQuery) {
     // For infinite queries, cast through unknown first to avoid type errors
     void queryClient.prefetchInfiniteQuery(
       queryOptions as unknown as Parameters<
@@ -68,11 +70,7 @@ export function prefetch(queryOptions: {
   } else {
     // For regular queries, cast to FetchQueryOptions
     void queryClient.prefetchQuery(
-      queryOptions as unknown as FetchQueryOptions<
-        unknown,
-        unknown,
-        unknown
-      >,
+      queryOptions as unknown as FetchQueryOptions<unknown, unknown, unknown>,
     );
   }
 }
