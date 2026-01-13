@@ -1,4 +1,4 @@
-import type { TRPCQueryOptions } from "@trpc/tanstack-react-query";
+import type { FetchQueryOptions } from "@tanstack/react-query";
 import { cache } from "react";
 import { headers } from "next/headers";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -40,17 +40,39 @@ export function HydrateClient(props: { children: React.ReactNode }) {
     </HydrationBoundary>
   );
 }
-export function prefetch<T extends ReturnType<TRPCQueryOptions<AppRouter>>>(
-  queryOptions: T,
-) {
+
+/**
+ * Prefetch a tRPC query on the server.
+ * This is a fire-and-forget operation; errors are handled silently.
+ */
+export function prefetch(queryOptions: {
+  queryKey: readonly unknown[];
+  queryFn?: unknown;
+}) {
   const queryClient = getQueryClient();
-  if (queryOptions.queryKey[1]?.type === "infinite") {
+  const queryKey = queryOptions.queryKey;
+  // Check if this is an infinite query by examining the query key structure
+  if (
+    Array.isArray(queryKey) &&
+    queryKey[1] &&
+    typeof queryKey[1] === "object" &&
+    "type" in queryKey[1] &&
+    queryKey[1].type === "infinite"
+  ) {
+    // For infinite queries, cast through unknown first to avoid type errors
     void queryClient.prefetchInfiniteQuery(
-      queryOptions as Parameters<
+      queryOptions as unknown as Parameters<
         typeof queryClient.prefetchInfiniteQuery
       >[0],
     );
   } else {
-    void queryClient.prefetchQuery(queryOptions);
+    // For regular queries, cast to FetchQueryOptions
+    void queryClient.prefetchQuery(
+      queryOptions as unknown as FetchQueryOptions<
+        unknown,
+        unknown,
+        unknown
+      >,
+    );
   }
 }

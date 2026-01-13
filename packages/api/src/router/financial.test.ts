@@ -1,5 +1,6 @@
-import type { Auth } from "@nestegg/auth";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import type { Auth } from "@nestegg/auth";
 
 import { appRouter } from "../root";
 import { createTRPCContext } from "../trpc";
