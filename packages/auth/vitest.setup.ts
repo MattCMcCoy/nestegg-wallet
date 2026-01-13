@@ -1,10 +1,17 @@
-import { beforeAll, afterAll } from "vitest";
+import { afterAll, beforeAll } from "vitest";
+
+// Helper to safely set environment variables in test environment
+function setEnvVar(key: string, value: string): void {
+  if (typeof process !== "undefined" && process.env) {
+    process.env[key] = value;
+  }
+}
 
 // Mock environment variables for auth tests
-process.env.AUTH_SECRET = "test-secret-key-for-testing-only";
-process.env.AUTH_DISCORD_ID = "test-discord-id";
-process.env.AUTH_DISCORD_SECRET = "test-discord-secret";
-process.env.POSTGRES_URL = "postgresql://test:test@localhost:5432/test";
+setEnvVar("AUTH_SECRET", "test-secret-key-for-testing-only");
+setEnvVar("AUTH_DISCORD_ID", "test-discord-id");
+setEnvVar("AUTH_DISCORD_SECRET", "test-discord-secret");
+setEnvVar("POSTGRES_URL", "postgresql://test:test@localhost:5432/test");
 
 beforeAll(() => {
   // Setup before all tests

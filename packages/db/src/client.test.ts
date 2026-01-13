@@ -1,5 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { URL } from "node:url";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock environment variables
 const mockEnv = vi.hoisted(() => ({
@@ -8,38 +7,47 @@ const mockEnv = vi.hoisted(() => ({
 
 vi.mock("dotenv/config", () => ({}));
 
+// Helper to dynamically import the client module
+async function importClient(): Promise<typeof import("./client")> {
+  return await import("./client");
+}
+
 describe("Database Client", () => {
   beforeEach(() => {
     vi.resetModules();
-    process.env.POSTGRES_URL = mockEnv.POSTGRES_URL;
+    if (typeof process !== "undefined" && process.env) {
+      process.env.POSTGRES_URL = mockEnv.POSTGRES_URL;
+    }
   });
 
   describe("Connection String Validation", () => {
-    it("should throw error when POSTGRES_URL is missing", () => {
-      delete process.env.POSTGRES_URL;
-      expect(() => {
-        // Re-import to trigger validation
-        vi.resetModules();
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
-        require("./client");
-      }).toThrow("Missing POSTGRES_URL environment variable");
+    it("should throw error when POSTGRES_URL is missing", async () => {
+      if (typeof process !== "undefined" && process.env) {
+        delete process.env.POSTGRES_URL;
+      }
+      vi.resetModules();
+      await expect(importClient()).rejects.toThrow(
+        "Missing POSTGRES_URL environment variable",
+      );
     });
 
-    it("should throw error when POSTGRES_URL has invalid format", () => {
-      process.env.POSTGRES_URL = "not-a-valid-url";
-      expect(() => {
-        vi.resetModules();
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
-        require("./client");
-      }).toThrow("Invalid POSTGRES_URL format");
+    it("should throw error when POSTGRES_URL has invalid format", async () => {
+      if (typeof process !== "undefined" && process.env) {
+        process.env.POSTGRES_URL = "not-a-valid-url";
+      }
+      vi.resetModules();
+      await expect(importClient()).rejects.toThrow(
+        "Invalid POSTGRES_URL format",
+      );
     });
 
-    it("should not expose connection string in error message", () => {
-      process.env.POSTGRES_URL = "not-a-valid-url";
+    it("should not expose connection string in error message", async () => {
+      if (typeof process !== "undefined" && process.env) {
+        process.env.POSTGRES_URL = "not-a-valid-url";
+      }
+      vi.resetModules();
       try {
-        vi.resetModules();
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
-        require("./client");
+        await importClient();
         expect.fail("Should have thrown an error");
       } catch (error) {
         const errorMessage =
@@ -51,13 +59,12 @@ describe("Database Client", () => {
       }
     });
 
-    it("should accept valid PostgreSQL connection string", () => {
-      process.env.POSTGRES_URL = "postgresql://user:pass@localhost:5432/db";
-      expect(() => {
-        vi.resetModules();
-        // eslint-disable-next-line @typescript-eslint/no-require-imports
-        require("./client");
-      }).not.toThrow();
+    it("should accept valid PostgreSQL connection string", async () => {
+      if (typeof process !== "undefined" && process.env) {
+        process.env.POSTGRES_URL = "postgresql://user:pass@localhost:5432/db";
+      }
+      vi.resetModules();
+      await expect(importClient()).resolves.toBeDefined();
     });
   });
 

@@ -32,7 +32,6 @@ async function signInAction() {
         "No URL returned from signInSocial. Please check your Discord OAuth configuration.",
       );
     }
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     redirect(res.url);
   } catch (error) {
     // Don't re-throw redirect errors (they're expected)
@@ -89,7 +88,6 @@ export async function AuthShowcase() {
               await auth.api.signOut({
                 headers: await headers(),
               });
-              // eslint-disable-next-line @typescript-eslint/no-unsafe-call
               redirect("/");
             } catch (error) {
               // Don't log redirect errors (they're expected)

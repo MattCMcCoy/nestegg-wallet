@@ -1,4 +1,4 @@
-import { beforeAll, afterAll } from "vitest";
+import { afterAll, beforeAll } from "vitest";
 
 // Add any database test setup here
 // For example, you might want to:

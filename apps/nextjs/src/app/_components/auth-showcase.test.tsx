@@ -1,5 +1,8 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import type { Session } from "@nestegg/auth";
+
 import { AuthShowcase } from "./auth-showcase";
 
 // Mock the auth module
@@ -28,13 +31,26 @@ describe("AuthShowcase", () => {
 
   it("should show user name when authenticated", async () => {
     const { getSession } = await import("~/auth/server");
-    vi.mocked(getSession).mockResolvedValue({
+    const mockSession: Session = {
+      session: {
+        id: "session-123",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        userId: "123",
+        expiresAt: new Date(),
+        token: "token-123",
+      },
       user: {
+        id: "123",
         name: "Test User",
         email: "test@example.com",
-        id: "123",
+        emailVerified: false,
+        image: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
-    } as any);
+    };
+    vi.mocked(getSession).mockResolvedValue(mockSession);
 
     render(await AuthShowcase());
     expect(screen.getByText(/logged in as test user/i)).toBeInTheDocument();

@@ -1,4 +1,5 @@
 import { beforeAll, vi } from "vitest";
+
 import "@testing-library/jest-dom/vitest";
 
 // Mock Next.js modules
@@ -12,8 +13,10 @@ vi.mock("next/headers", () => ({
 
 vi.mock("next/navigation", () => ({
   redirect: vi.fn((url: string) => {
-    const error = new Error(`Redirect to ${url}`);
-    (error as any).digest = `NEXT_REDIRECT;${url}`;
+    const error = new Error(`Redirect to ${url}`) as Error & {
+      digest?: string;
+    };
+    error.digest = `NEXT_REDIRECT;${url}`;
     throw error;
   }),
   useRouter: vi.fn(() => ({
