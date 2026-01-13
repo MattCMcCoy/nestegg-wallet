@@ -35,16 +35,16 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
-    "@turbo/gen": "^2.5.8",
-    "@vitest/coverage-v8": "^2.1.8",
-    "@vitest/ui": "^2.1.8",
+    "@turbo/gen": "^2.7.4",
+    "@vitest/coverage-v8": "^4.0.17",
+    "@vitest/ui": "^4.0.17",
     "dotenv": "^17.2.3",
-    "dotenv-cli": "^10.0.0",
-    "jsdom": "^25.0.1",
+    "dotenv-cli": "^11.0.0",
+    "jsdom": "^27.4.0",
     "prettier": "catalog:",
-    "turbo": "^2.5.8",
+    "turbo": "^2.7.4",
     "typescript": "catalog:",
-    "vitest": "^2.1.8"
+    "vitest": "^4.0.17"
   },
   "prettier": "@nestegg/prettier-config"
 }
